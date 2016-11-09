@@ -3,13 +3,13 @@ import pgp from 'pg-promise'
 const pg = pgp()
 const db = pg(process.env['GS_DB_URL'] || '')
 
-db.tx(() => {
+db.tx((tx) => {
 	let queries = [
 		`DROP TABLE IF EXISTS users;`
 	]
 
-	return this.batch(queries.map((query) => {
-		return this.none(query, [])
+	return tx.batch(queries.map((query) => {
+		return tx.none(query, [])
 	}))
 }).then(() => {
     console.log('Migration 1 Complete')

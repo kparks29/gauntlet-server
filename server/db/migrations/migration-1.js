@@ -3,7 +3,7 @@ import pgp from 'pg-promise'
 const pg = pgp()
 const db = pg(process.env['GS_DB_URL'] || '')
 
-let migration = db.tx(() => {
+let migration = db.tx((tx) => {
 	let queries = [
 		`CREATE TABLE users (
 			id SERIAL NOT NULL,
@@ -14,8 +14,8 @@ let migration = db.tx(() => {
 		);`
 	]
 
-	return this.batch(queries.map((query) => {
-		return this.none(query, [])
+	return tx.batch(queries.map((query) => {
+		return tx.none(query, [])
 	}))
 })
 

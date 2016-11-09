@@ -1,7 +1,7 @@
 import pgp from 'pg-promise'
 
 const pg = pgp()
-const db = pg(process.env.GS_DB_URL || '')
+const db = pg(process.env['GS_DB_URL'] || '')
 
 db.tx(() => {
 	let queries = [

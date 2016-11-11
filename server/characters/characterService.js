@@ -18,7 +18,6 @@ export default class UserService {
 	}
 
 	createCharacter (userId, character) {
-		console.log(userId, character)
 		if (!character.class) {
 			return Promise.reject('Missing Class')
 		}

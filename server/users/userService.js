@@ -24,7 +24,7 @@ export default class UserService {
 		return promise.then((results) => {
 			if (results.length > 0) {
 				// user exists, verify password
-				if (this.UserRepo.verifyPassword(body.password, results[0])) {
+				if (userType === 'steam' || this.UserRepo.verifyPassword(body.password, results[0])) {
 					return results[0]
 				} else {
 					return Promise.reject('Invalid Login')

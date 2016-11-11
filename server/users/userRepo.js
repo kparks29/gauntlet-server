@@ -33,7 +33,7 @@ export default class UserRepo {
 			user.hashed_password = bcrypt.hashSync(user.password, user.salt)
 			delete user.password
 		}
-		return db.any(userQueries.createUser, [user.username, user.salt, user.hashed_password, user.steam_id, uuid.v1()])
+		return db.any(userQueries.createUser, [user.username, user.salt, user.hashed_password, user.steam_id, uuid.v4()])
 	}
 
 	verifyPassword (password, user) {

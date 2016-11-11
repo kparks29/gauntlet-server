@@ -31,17 +31,15 @@ export default class UserService {
 				}
 			} else {
 				// user doesn't exist, create user
-				return this.UserRepo.createUser(body).then(() => {
-					return userType === 'username' ? this.UserRepo.getUserByUsername(body.username) : this.UserRepo.getUserBySteamId(body.steam_id) 
-				}).then((results) => {
+				return this.UserRepo.createUser(body).then((results) => {
 					return results[0]
 				})
 			}
 		}).then((user) => {
-			delete user.id
 			delete user.hashed_password
 			delete user.salt
 			user.token = jwt.sign(user, process.env['GS_SECRETKEY'])
+			delete user.id
 			return user
 		}).catch((error) => {
 			console.log(error)

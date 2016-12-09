@@ -18,7 +18,7 @@ export default class UserService {
 	}
 
 	createCharacter (userId, character) {
-		if (!character.class) {
+		if (!character.characterClass) {
 			return Promise.reject('Missing Class')
 		}
 
@@ -30,17 +30,17 @@ export default class UserService {
 		character.level = 1
 		character.experience = 0
 
-		if (character.class === 'wizard') {
+		if (character.characterClass === 'wizard') {
 			character.strength = 30
 			character.defense = 40
 			character.magic = 100
 			character.max_health = 400
-		} else if (character.class === 'warrior') {
+		} else if (character.characterClass === 'warrior') {
 			character.strength = 90
 			character.defense = 50
 			character.magic = 30
 			character.max_health = 600
-		} else if (character.class === 'archer') {
+		} else if (character.characterClass === 'archer') {
 			character.strength = 70
 			character.defense = 60
 			character.magic = 40
@@ -59,7 +59,7 @@ export default class UserService {
 
 	updateCharacter (characterUuid, character) {
 		let allowedProperties = [
-			'name',
+			'characterName',
 			'level',
 			'experience',
 			'strength',

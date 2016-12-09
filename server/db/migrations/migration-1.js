@@ -23,8 +23,8 @@ let migration = db.tx((tx) => {
 		`CREATE TABLE IF NOT EXISTS characters (
 			id SERIAL PRIMARY KEY,
 			uuid UUID,
-			name TEXT,
-			class VARCHAR(36),
+			characterName TEXT,
+			characterClass VARCHAR(36),
 			level INT,
 			experience BIGINT,
 			strength INT,

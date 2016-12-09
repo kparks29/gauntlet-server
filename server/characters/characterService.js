@@ -10,7 +10,7 @@ export default class UserService {
 	getCharacters (userId) {
 		
 		return this.CharacterRepo.getCharactersByUserId(userId).then((results) => {
-			return results
+			return { characters: results }
 		}).catch((error) => {
 			console.log(error)
 			return Promise.reject('Could not get characters')
@@ -18,7 +18,7 @@ export default class UserService {
 	}
 
 	createCharacter (userId, character) {
-		if (!character.characterClass) {
+		if (!character.character_class) {
 			return Promise.reject('Missing Class')
 		}
 
@@ -29,18 +29,19 @@ export default class UserService {
 		character.user_id = userId
 		character.level = 1
 		character.experience = 0
+		character.character_class = character.character_class.charAt(0).toUpperCase() + character.character_class.toLowerCase().slice(1)
 
-		if (character.characterClass === 'wizard') {
+		if (character.character_class === 'Wizard') {
 			character.strength = 30
 			character.defense = 40
 			character.magic = 100
 			character.max_health = 400
-		} else if (character.characterClass === 'warrior') {
+		} else if (character.character_class === 'Warrior') {
 			character.strength = 90
 			character.defense = 50
 			character.magic = 30
 			character.max_health = 600
-		} else if (character.characterClass === 'archer') {
+		} else if (character.character_class === 'Archer') {
 			character.strength = 70
 			character.defense = 60
 			character.magic = 40
@@ -59,7 +60,7 @@ export default class UserService {
 
 	updateCharacter (characterUuid, character) {
 		let allowedProperties = [
-			'characterName',
+			'character_name',
 			'level',
 			'experience',
 			'strength',

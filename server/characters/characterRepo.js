@@ -23,7 +23,7 @@ export default class CharacterRepo {
 	}
 
 	createCharacter (character) {
-		return db.any(characterQueries.createCharacter, [uuid.v4(), character.characterName, character.characterClass, character.level, character.experience, character.strength, character.defense, character.magic, character.max_health, character.user_id])
+		return db.any(characterQueries.createCharacter, [uuid.v4(), character.character_name, character.character_class, character.level, character.experience, character.strength, character.defense, character.magic, character.max_health, character.user_id])
 	}
 
 	updateCharacterByUuid (characterUuid, character) {
